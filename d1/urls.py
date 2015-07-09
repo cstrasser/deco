@@ -15,19 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from main.models import Organization,Location,Contact
-#from main.forms import AuthenticationForm
-
-admin.site.site_header = 'Decorator Administration'
-#admin.autodiscover()
-#admin.site.login_form = AuthenticationForm
-
-
-admin.site.register(Organization)
-admin.site.register(Location)
-admin.site.register(Contact)
+from main import views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    #url(r'^$', include('main.urls')),
+    url(r'^login/', views.do_login, name = 'do_login'),
+    url(r'^home', views.home, name = 'home'),
+    url(r'^admin/', include(admin.site.urls))
 ]
 #
