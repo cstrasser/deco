@@ -1,4 +1,6 @@
+import datetime
 from django.db import models
+
 
 class Organization(models.Model):  #customer or vendor person or company 
     organizationname = models.CharField(db_column='OrgName', max_length=75,blank=True, null=True)  
@@ -40,7 +42,7 @@ class Organization(models.Model):  #customer or vendor person or company
          return '%s %s' %(self.firstname, self.lastname)
 
 class Location(models.Model): 
-    orgid = models.ForeignKey(Organization, db_column='OrgID')  
+    orgid = models.ForeignKey(Organization)  
     locationname = models.CharField(db_column='LocationName', max_length=75, null=True)
     phone = models.CharField(db_column='MainPhone',max_length=20, blank=True, null=True) 
     is_default = models.BooleanField(db_column='default', default = True)
@@ -69,7 +71,7 @@ class Location(models.Model):
          return '%s ' %(self.locationname)   
         
 class Contact(models.Model):   
-    locationid = models.ForeignKey(Location, db_column='LocationID')  
+    location = models.ForeignKey(Location)  
     firstname = models.CharField(db_column='FirstName', max_length=50,blank=True, null=True)  
     lastname = models.CharField(db_column='LastName', max_length=50,blank=True, null=True) 
     is_primary = models.NullBooleanField(db_column='PrimaryContact')

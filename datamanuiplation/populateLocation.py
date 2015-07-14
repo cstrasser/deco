@@ -9,10 +9,10 @@ django.setup()
 from main.models import Location, Organization
 
 def addloc(location):
-   o = Organization.objects.filter(orgid = location[0])[0]
-   print location[0], o.orgid
+   #o = Organization.objects.filter(orgid = location[0])[0]
+   #print location[0], o.orgid
    c = Location.objects.get_or_create(
-      orgid  = o,
+      #orgid  = o,
       address1 = location[1],
       city = location[2],   
       zippostal_code = location[4],
