@@ -8,7 +8,7 @@ from main.models import Organization, Location,Contact
 def home(request):
     
     #customer_list = Organization.objects.all().order_by('organizationname')[:100]
-    location_list = Location.objects.filter(is_default = True).order_by('orgid')[:100]
+    location_list = Location.objects.filter(is_default = True).order_by('orgid').select_related()[:100]
         
     return render(request,'home.html',{'list':location_list})
 

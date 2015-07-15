@@ -19,8 +19,8 @@ from main import views
 
 urlpatterns = [
     #url(r'^$', include('main.urls')),
-    url(r'^login/', views.do_login, name = 'do_login'),
-    url(r'^home', views.home, name = 'home'),
+    url(r'^login/$', views.do_login, name = 'do_login'),
+    url(r'^home/$', views.home, name = 'home'),
     url(r'^admin/', include(admin.site.urls))
 ]
 #

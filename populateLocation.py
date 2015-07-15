@@ -6,22 +6,22 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'd1.settings')
 import django
 django.setup()
 
-from main.models import Location, Organization
+from main.models import Location, Organization, Contact
 
 def addloc(dataline):
-   o =Organization.objects.get_or_create(organizationname =dataline[0])
-   
-   l = Location.objects.get_or_create( 
+   o,worked = Organization.objects.get_or_create(organizationname =dataline[0])
+       #get or create returns a tuple of the object and a boolean if it was successful
+   l,worked = Location.objects.get_or_create( 
       address1 = dataline[1],
       city = dataline[2],
       stateorprovince = dataline[3],
       zippostal_code = dataline[4],
-      orgid = o
-      )
-   c= Contact.objects.get_or_create(
+      orgid = o)
+   
+   c = Contact.objects.get_or_create(
          firstname = dataline[5],
          lastname = dataline[6],
-         phone = dataline[7],
+         phone1 = dataline[7],
          email = dataline[8],
          location =  l)
    
@@ -31,8 +31,8 @@ def addloc(dataline):
 def run():    
     with  open('data.txt') as f:
      #print f.read()
-     for location in f:
-        location = location.split(",")
+     for dataline in f:
+        dataline = dataline.split(",")
         addloc(dataline)
         # #print 'orgname %s Address: %s City %s Prov %s PC %s firstname %s, Lastname %s ph %s eml %s' %(
         #                                            location[0], location[1],
