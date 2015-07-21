@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django import forms
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from main.models import Organization, Location,Contact
 
 
@@ -8,9 +9,22 @@ from main.models import Organization, Location,Contact
 def home(request):
     
     #customer_list = Organization.objects.all().order_by('organizationname')[:100]
-    location_list = Location.objects.filter(is_default = True).order_by('orgid').select_related()[:100]
-        
-    return render(request,'home.html',{'list':location_list})
+    location_list = Location.objects.filter(is_default = True).order_by('orgid').select_related()
+    paginator = Paginator(location_list, 25)
+    
+    page = request.GET.get('page')
+    try:
+        locations = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        locations = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        locations = paginator.page(paginator.num_pages)
+
+    return render_to_response('home.html', {"locations": locations})
+    
+    #return render(request,'home.html',{'list':location_list})
 
 
 def do_login(request):

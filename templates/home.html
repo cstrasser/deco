@@ -1,35 +1,53 @@
 {%extends 'base.html'%}
+{%block page_header %}
+<div class="pagination">
+  <div class="btn-group btn-group-sm" role="group" aria-label="...">
 
+        {% if locations.has_previous %}
+          <button type="button" class="btn btn-default">
+            <a href="?page={{ locations.previous_page_number }}">Prev</a></button>
+        {% endif %}
+
+          <button type="button" class="btn btn-default">
+            {{ locations.number }} of {{ locations.paginator.num_pages }}</button>
+        
+        {% if locations.has_next %}
+           <button type="button" class="btn btn-default">
+            <a href="?page={{ locations.next_page_number }}">Next</a></button>
+        {% endif %}
+      </div>
+</div>  
+        <button type="button" class="btn btn-info btn-group-sm">
+            <a href="/sto">New</a></button>
+  
+    
+
+{% endblock %}
 {% block main_content %}
  <div class="span8">
-    <input type="submit" name="New" formaction="/sto/" value="New Org" /><p></p>
-    <table class="table table-striped">
+     <table class="table table-striped">
       <thead>
         <tr>
           <th>Organization</th>
-          <th>Name</th>
-          
+          <th>Name</th>          
           <th>Address</th>
           <th>City</th>
-          <th>State</th>
-        
+          <th>State</th>        
         </tr>
       </thead>
   </div>
       <tbody>
-        <tr>
-          
-        {% for item  in list %}
-            
-            <td><a href="{{ item.orgid_id }}">{{item.orgid}}</a></td>
-            
-            <td>{{item.contact_set.all.0}}</td>
-            <td>{{item.address1}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.stateorprovince}}</td>
+        <tr>      
+        {% for location in locations %}
+    {# Each "contact" is a Contact model object. #}
+    <td><a href="{{ location.orgid_id }}">{{location.orgid}}</a></td>
+            <td>{{location.contact_set.all.0}}</td>
+            <td>{{location.address1}}</td>
+            <td>{{location.city}}</td>
+            <td>{{location.stateorprovince}}</td>
             </tr>
-           
-        {% endfor %}   
+{% endfor %}
+
       </tbody>
     </table>
   </div>
