@@ -19,8 +19,6 @@
 </div>  
         <button type="button" class="btn btn-info btn-group-sm">
             <a href="/sto">New</a></button>
-  
-    
 
 {% endblock %}
 {% block main_content %}
@@ -40,7 +38,7 @@
         <tr>      
         {% for location in locations %}
     {# Each "contact" is a Contact model object. #}
-    <td><a href="{{ location.orgid_id }}">{{location.orgid}}</a></td>
+    <td><a href="../orgform/{{ location.orgid_id }}">{{location.orgid}}</a></td>
             <td>{{location.contact_set.all.0}}</td>
             <td>{{location.address1}}</td>
             <td>{{location.city}}</td>

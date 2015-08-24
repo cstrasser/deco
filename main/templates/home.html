@@ -1,8 +1,9 @@
 {%extends 'base.html'%}
 
 {% block main_content %}
+
  <div class="span8">
-    <input type="submit" name="New" formaction="/sto/" value="New Org" /><p></p>
+    <input type="submit" name="New" formaction="/sto/" value="New Org" />{% csrf_token %}<p></p>
     <table class="table table-striped">
       <thead>
         <tr>

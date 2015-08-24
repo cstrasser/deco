@@ -33,14 +33,18 @@ def do_login(request):
         username = request.POST['username']
         password = request.POST['password'] 
         user = authenticate(username=username, password=password)
+        
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request,'home.html')
+                print 'login user is active'
+                return render(request,'home.html',{})
             else:
+                
                 pass # Return a 'disabled account' error message
         else:
-            pass#  Return an 'invalid login' error message. 
+           pass#  Return an 'invalid login' error message.
+            
     else:
         return render(request, 'loginform.html')
     

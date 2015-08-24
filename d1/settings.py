@@ -25,7 +25,7 @@ SECRET_KEY = 'o@7uzyv5_v9f7$+mn2co6933k_n=pb39y!ae!gk9b2muhe(tv0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
+''' user admin password 1234'''
 ALLOWED_HOSTS = []
 
 
@@ -38,8 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
     'main',
+    'organization',
+    'crispy_forms',
+    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,7 +92,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST' #was UTC
 
 USE_I18N = True
 
