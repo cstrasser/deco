@@ -1,40 +1,50 @@
 {%extends 'base.html'%}
 
+{% block page_header%}
+    <div class="pagination">
+    <span class="step-links">
+        {% if locations.has_previous %}
+            <a href="?page={{ locations.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ locations.number }} of {{ locations.paginator.num_pages }}.
+        </span>
+
+        {% if locations.has_next %}
+            <a href="?page={{ locations.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
+
 {% block main_content %}
 
- <div class="span8">
+<div class="span8">
     <input type="submit" name="New" formaction="/sto/" value="New Org" />{% csrf_token %}<p></p>
     <table class="table table-striped">
-      <thead>
+     <thead>
         <tr>
           <th>Organization</th>
           <th>Name</th>
-          
           <th>Address</th>
           <th>City</th>
           <th>State</th>
-        
         </tr>
-      </thead>
-  </div>
-      <tbody>
-        <tr>
-          
-        {% for item  in list %}
-            
+    </thead>
+</div>
+    <tbody>
+      <tr>  {% for item  in locations %}
             <td><a href="{{ item.orgid_id }}">{{item.orgid}}</a></td>
-            
             <td>{{item.contact_set.all.0}}</td>
             <td>{{item.address1}}</td>
             <td>{{item.city}}</td>
             <td>{{item.stateorprovince}}</td>
-            </tr>
-           
-        {% endfor %}   
-      </tbody>
+      </tr> {% endfor %}   
+     </tbody>
     </table>
   </div>
-</div> 
-    
+</div>
   
-{% endblock%}  
+{% endblock %}  
