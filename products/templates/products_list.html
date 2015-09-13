@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+<h1>Products List</h1>
+{%block main_content%}
+    <table class = table-striped>
+{% for item in object_list %}
+    <tr>
+        <td>{{item.part_number}}</td><td>{{item.name}}</td>  <td>{{item.description}}</td>
+        <td>{{item.sell_price}}</td><td>{{item.uom}}</td>
+    </tr>
+{%endfor%}
+</table>
+{%endblock%}

@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from main import views
+from products.views import ProductList,ProductUpdate,ProductCreate, ProductUpdate, ProductDetail
+
+
 
 urlpatterns = [
     #url(r'^$', include('main.urls')),
@@ -24,4 +27,12 @@ urlpatterns = [
     url(r'^home/$', views.home, name = 'home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^orgform/', include('organization.urls')),
+    url(r'^about',views.about, name= 'about'),
+    url(r'^p', view = ProductList.as_view(), name = "productlist"),
+    url(r'^u/(?P<pk>\d+)/$', view = ProductUpdate.as_view(success_url="/p"), name = "productupdate"),
+    url(r'^d/(?P<pk>\d+)/$', view = ProductDetail.as_view(), name = "productudetail"),
+    url(r'^c/$', view = ProductCreate.as_view(success_url="/p"), name = "productcreate"),
+    
 ]
+
+ 

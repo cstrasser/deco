@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'main',
     'organization',
     'crispy_forms',
+     'products',
     
 )
 

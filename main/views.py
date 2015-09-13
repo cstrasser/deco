@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response , redirect
 from django import forms
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -39,6 +39,8 @@ def do_login(request):
                 login(request, user)
                 print 'login user is active'
                 return render(request,'home.html',{})
+                #return redirect(request,'home.html',{})
+            
             else:
                 
                 pass # Return a 'disabled account' error message
@@ -48,7 +50,12 @@ def do_login(request):
     else:
         return render(request, 'loginform.html')
     
+def about(request):
+    return render(request, 'about.html')
+
     
-    
-    
+#class listview(request);
+
+ #   return('')
+
     
